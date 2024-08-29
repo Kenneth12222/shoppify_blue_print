@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Add New Productsssss</h2>
+    <form method="POST" action="{{ url_for('add_product') }}">
+        <div class="form-group">
+            <label for="name">Product Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price (in cents)</label>
+            <input type="number" class="form-control" id="price" name="price" required>
+        </div>
+        <div class="form-group">
+            <label for="image">Image URL</label>
+            <input type="url" class="form-control" id="image" name="image" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Product</button>
+    </form>
+</div>
+{% endblock %}

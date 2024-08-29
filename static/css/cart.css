@@ -1,0 +1,39 @@
+.container {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #343a40;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.table th {
+    background-color: #343a40;
+    color: #fff;
+    font-weight: 700;
+}
+
+.table td {
+    color: #495057;
+}
+
+.btn-outline-primary:hover, .btn-outline-danger:hover {
+    color: #fff;
+}
+
+.empty-cart-message {
+    text-align: center;
+    color: #6c757d;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-top: 2rem;
+}

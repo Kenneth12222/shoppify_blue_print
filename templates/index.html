@@ -1,0 +1,25 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% for product in products %}
+        <div class="row-content">
+            <div class="card-item">
+                <img src="{{ product.image }}" class="card-image" alt="{{ product.name }}">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title-name">{{ product.name }}</h5>
+                    <p class="card-text-price">${{ product.price / 100 }}</p>
+                    <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="post">
+                        <button type="submit" class="btn btn-primary mt-auto">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    
+    {% endfor %}
+</div>
+{% endblock %}
+
