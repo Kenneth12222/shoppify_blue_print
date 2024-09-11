@@ -1,5 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
+  <!--==main==========================-->
+  <section id="main">
+
+    <!--==header=============================-->
+    <header>
+        <nav class="navigation">
+            <!--**menu***********-->
+            <ul class="menu">
+                <li><a href="index.html">All</a></li>
+                <li><a href="#category">Womens</a></li>
+                <li><a href="#shopping-banner">Kinds</a></li>
+                <li>
+                    <a href="#popular-dress">Populer</a>
+                    <span class="nav-lable">Hot Offer</span>
+                </li>
+                <li><a href="#recent-products">Recent</a></li>
+            </ul>
+        </nav>
+    </header>
+</section>
 <!-- Product Grid -->
 <div class="product-grid">
     {% for product in products %}
@@ -7,9 +27,6 @@
         <div>
             <img src="{{ product.image }}" alt="{{ product.name }}">
         </div>
-        <!-- <form class="form" action="{{ url_for('checkout', product_id=product.id) }}" method="GET">
-          <button type="submit">Buy Now</button>
-      </form> -->
         <div class="product-info">
             <h3>{{ product.name }}</h3>
             <p>Price: ${{ product.price / 100 }}</p>

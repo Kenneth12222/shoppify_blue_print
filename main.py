@@ -1,3 +1,5 @@
+
+
 import os
 from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -250,6 +252,26 @@ class LogoutView(MethodView):
     def get(self):
         logout_user()
         return redirect(url_for('index'))
+
+
+@app.route('/product/<int:product_id>', methods=['GET'], endpoint='product_detail')
+def product_detail(product_id):
+    product = Product.query.get_or_404(product_id)
+    return render_template('product_detail.html', product=product)
+
+
+@app.route('/collection')
+def collection():
+    products = Product.query.all()
+    return render_template('collection.html', products=products)
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
 
 # Register class-based views as routes
 app.add_url_rule('/', view_func=IndexView.as_view('index'))
