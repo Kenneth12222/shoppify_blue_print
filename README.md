@@ -1,0 +1,1 @@
+href="{{ url_for('product_detail', product_id=product.id) }}"

@@ -22,7 +22,7 @@ class TransferService(StripeService):
         """
         currency: str
         """
-        3-letter [ISO code for currency](https://stripe.com/docs/payouts).
+        Three-letter [ISO code for currency](https://www.iso.org/iso-4217-currency-codes.html) in lowercase. Must be a [supported currency](https://docs.stripe.com/currencies).
         """
         description: NotRequired[str]
         """
@@ -134,7 +134,6 @@ class TransferService(StripeService):
             self._request(
                 "get",
                 "/v1/transfers",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -154,7 +153,6 @@ class TransferService(StripeService):
             await self._request_async(
                 "get",
                 "/v1/transfers",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -174,7 +172,6 @@ class TransferService(StripeService):
             self._request(
                 "post",
                 "/v1/transfers",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -194,7 +191,6 @@ class TransferService(StripeService):
             await self._request_async(
                 "post",
                 "/v1/transfers",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -217,7 +213,6 @@ class TransferService(StripeService):
                 "/v1/transfers/{transfer}".format(
                     transfer=sanitize_id(transfer),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -240,7 +235,6 @@ class TransferService(StripeService):
                 "/v1/transfers/{transfer}".format(
                     transfer=sanitize_id(transfer),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -265,7 +259,6 @@ class TransferService(StripeService):
                 "/v1/transfers/{transfer}".format(
                     transfer=sanitize_id(transfer),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -290,7 +283,6 @@ class TransferService(StripeService):
                 "/v1/transfers/{transfer}".format(
                     transfer=sanitize_id(transfer),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,

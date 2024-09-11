@@ -72,9 +72,11 @@ class _APIRequestor(object):
 
     def __init__(
         self,
-        options: RequestorOptions = RequestorOptions(),
+        options: Optional[RequestorOptions] = None,
         client: Optional[HTTPClient] = None,
     ):
+        if options is None:
+            options = RequestorOptions()
         self._options = options
         self._client = client
 
@@ -179,10 +181,10 @@ class _APIRequestor(object):
         options: Optional[RequestOptions] = None,
         *,
         base_address: BaseAddress,
-        api_mode: ApiMode,
         usage: Optional[List[str]] = None,
     ) -> "StripeObject":
         requestor = self._replace_options(options)
+        api_mode = "V1"
         rbody, rcode, rheaders = requestor.request_raw(
             method.lower(),
             url,
@@ -210,9 +212,9 @@ class _APIRequestor(object):
         options: Optional[RequestOptions] = None,
         *,
         base_address: BaseAddress,
-        api_mode: ApiMode,
         usage: Optional[List[str]] = None,
     ) -> "StripeObject":
+        api_mode = "V1"
         requestor = self._replace_options(options)
         rbody, rcode, rheaders = await requestor.request_raw_async(
             method.lower(),
@@ -241,9 +243,9 @@ class _APIRequestor(object):
         options: Optional[RequestOptions] = None,
         *,
         base_address: BaseAddress,
-        api_mode: ApiMode,
         usage: Optional[List[str]] = None,
     ) -> StripeStreamResponse:
+        api_mode = "V1"
         stream, rcode, rheaders = self.request_raw(
             method.lower(),
             url,
@@ -271,9 +273,9 @@ class _APIRequestor(object):
         options: Optional[RequestOptions] = None,
         *,
         base_address: BaseAddress,
-        api_mode: ApiMode,
         usage: Optional[List[str]] = None,
     ) -> StripeStreamResponseAsync:
+        api_mode = "V1"
         stream, rcode, rheaders = await self.request_raw_async(
             method.lower(),
             url,
@@ -507,7 +509,10 @@ class _APIRequestor(object):
                 abs_url = urlunsplit((scheme, netloc, path, query, fragment))
             post_data = None
         elif method == "post":
-            if api_mode == "V1FILES":
+            if (
+                options is not None
+                and options.get("content_type") == "multipart/form-data"
+            ):
                 generator = MultipartDataGenerator()
                 generator.add_params(params or {})
                 post_data = generator.get_post_data()

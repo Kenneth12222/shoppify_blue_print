@@ -87,6 +87,10 @@ class OutboundTransferService(StripeService):
         """
 
     class UpdateParamsTrackingDetailsUsDomesticWire(TypedDict):
+        chips: NotRequired[str]
+        """
+        CHIPS System Sequence Number (SSN) for funds sent over the `us_domestic_wire` network.
+        """
         imad: NotRequired[str]
         """
         IMAD for funds sent over the `us_domestic_wire` network.
@@ -112,7 +116,6 @@ class OutboundTransferService(StripeService):
                 "/v1/test_helpers/treasury/outbound_transfers/{outbound_transfer}".format(
                     outbound_transfer=sanitize_id(outbound_transfer),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -135,7 +138,6 @@ class OutboundTransferService(StripeService):
                 "/v1/test_helpers/treasury/outbound_transfers/{outbound_transfer}".format(
                     outbound_transfer=sanitize_id(outbound_transfer),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -158,7 +160,6 @@ class OutboundTransferService(StripeService):
                 "/v1/test_helpers/treasury/outbound_transfers/{outbound_transfer}/fail".format(
                     outbound_transfer=sanitize_id(outbound_transfer),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -181,7 +182,6 @@ class OutboundTransferService(StripeService):
                 "/v1/test_helpers/treasury/outbound_transfers/{outbound_transfer}/fail".format(
                     outbound_transfer=sanitize_id(outbound_transfer),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -204,7 +204,6 @@ class OutboundTransferService(StripeService):
                 "/v1/test_helpers/treasury/outbound_transfers/{outbound_transfer}/post".format(
                     outbound_transfer=sanitize_id(outbound_transfer),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -227,7 +226,6 @@ class OutboundTransferService(StripeService):
                 "/v1/test_helpers/treasury/outbound_transfers/{outbound_transfer}/post".format(
                     outbound_transfer=sanitize_id(outbound_transfer),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -250,7 +248,6 @@ class OutboundTransferService(StripeService):
                 "/v1/test_helpers/treasury/outbound_transfers/{outbound_transfer}/return".format(
                     outbound_transfer=sanitize_id(outbound_transfer),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -273,7 +270,6 @@ class OutboundTransferService(StripeService):
                 "/v1/test_helpers/treasury/outbound_transfers/{outbound_transfer}/return".format(
                     outbound_transfer=sanitize_id(outbound_transfer),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,

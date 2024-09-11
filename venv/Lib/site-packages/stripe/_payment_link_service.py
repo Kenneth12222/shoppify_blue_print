@@ -548,11 +548,13 @@ class PaymentLinkService(StripeService):
         """
         statement_descriptor: NotRequired[str]
         """
-        Extra information about the payment. This will appear on your customer's statement when this payment succeeds in creating a charge.
+        Text that appears on the customer's statement as the statement descriptor for a non-card charge. This value overrides the account's default statement descriptor. For information about requirements, including the 22-character limit, see [the Statement Descriptor docs](https://docs.stripe.com/get-started/account/statement-descriptors).
+
+        Setting this value for a card charge returns an error. For card charges, set the [statement_descriptor_suffix](https://docs.stripe.com/get-started/account/statement-descriptors#dynamic) instead.
         """
         statement_descriptor_suffix: NotRequired[str]
         """
-        Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that's set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
+        Provides information about a card charge. Concatenated to the account's [statement descriptor prefix](https://docs.stripe.com/get-started/account/statement-descriptors#static) to form the complete statement descriptor that appears on the customer's statement.
         """
         transfer_group: NotRequired[str]
         """
@@ -1346,11 +1348,13 @@ class PaymentLinkService(StripeService):
         """
         statement_descriptor: NotRequired["Literal['']|str"]
         """
-        Extra information about the payment. This will appear on your customer's statement when this payment succeeds in creating a charge.
+        Text that appears on the customer's statement as the statement descriptor for a non-card charge. This value overrides the account's default statement descriptor. For information about requirements, including the 22-character limit, see [the Statement Descriptor docs](https://docs.stripe.com/get-started/account/statement-descriptors).
+
+        Setting this value for a card charge returns an error. For card charges, set the [statement_descriptor_suffix](https://docs.stripe.com/get-started/account/statement-descriptors#dynamic) instead.
         """
         statement_descriptor_suffix: NotRequired["Literal['']|str"]
         """
-        Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that's set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
+        Provides information about a card charge. Concatenated to the account's [statement descriptor prefix](https://docs.stripe.com/get-started/account/statement-descriptors#static) to form the complete statement descriptor that appears on the customer's statement.
         """
         transfer_group: NotRequired["Literal['']|str"]
         """
@@ -1685,7 +1689,6 @@ class PaymentLinkService(StripeService):
             self._request(
                 "get",
                 "/v1/payment_links",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1705,7 +1708,6 @@ class PaymentLinkService(StripeService):
             await self._request_async(
                 "get",
                 "/v1/payment_links",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1725,7 +1727,6 @@ class PaymentLinkService(StripeService):
             self._request(
                 "post",
                 "/v1/payment_links",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1745,7 +1746,6 @@ class PaymentLinkService(StripeService):
             await self._request_async(
                 "post",
                 "/v1/payment_links",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1768,7 +1768,6 @@ class PaymentLinkService(StripeService):
                 "/v1/payment_links/{payment_link}".format(
                     payment_link=sanitize_id(payment_link),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1791,7 +1790,6 @@ class PaymentLinkService(StripeService):
                 "/v1/payment_links/{payment_link}".format(
                     payment_link=sanitize_id(payment_link),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1814,7 +1812,6 @@ class PaymentLinkService(StripeService):
                 "/v1/payment_links/{payment_link}".format(
                     payment_link=sanitize_id(payment_link),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1837,7 +1834,6 @@ class PaymentLinkService(StripeService):
                 "/v1/payment_links/{payment_link}".format(
                     payment_link=sanitize_id(payment_link),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,

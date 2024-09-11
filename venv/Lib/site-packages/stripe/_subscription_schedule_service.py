@@ -349,7 +349,7 @@ class SubscriptionScheduleService(StripeService):
         """
         unit_amount: NotRequired[int]
         """
-        A positive integer in cents (or local equivalent) (or 0 for a free price) representing how much to charge.
+        A positive integer in cents (or local equivalent) (or 0 for a free price) representing how much to charge or a negative integer representing the amount to credit to the customer.
         """
         unit_amount_decimal: NotRequired[str]
         """
@@ -997,7 +997,7 @@ class SubscriptionScheduleService(StripeService):
         """
         unit_amount: NotRequired[int]
         """
-        A positive integer in cents (or local equivalent) (or 0 for a free price) representing how much to charge.
+        A positive integer in cents (or local equivalent) (or 0 for a free price) representing how much to charge or a negative integer representing the amount to credit to the customer.
         """
         unit_amount_decimal: NotRequired[str]
         """
@@ -1197,7 +1197,6 @@ class SubscriptionScheduleService(StripeService):
             self._request(
                 "get",
                 "/v1/subscription_schedules",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1217,7 +1216,6 @@ class SubscriptionScheduleService(StripeService):
             await self._request_async(
                 "get",
                 "/v1/subscription_schedules",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1237,7 +1235,6 @@ class SubscriptionScheduleService(StripeService):
             self._request(
                 "post",
                 "/v1/subscription_schedules",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1257,7 +1254,6 @@ class SubscriptionScheduleService(StripeService):
             await self._request_async(
                 "post",
                 "/v1/subscription_schedules",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1280,7 +1276,6 @@ class SubscriptionScheduleService(StripeService):
                 "/v1/subscription_schedules/{schedule}".format(
                     schedule=sanitize_id(schedule),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1303,7 +1298,6 @@ class SubscriptionScheduleService(StripeService):
                 "/v1/subscription_schedules/{schedule}".format(
                     schedule=sanitize_id(schedule),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1326,7 +1320,6 @@ class SubscriptionScheduleService(StripeService):
                 "/v1/subscription_schedules/{schedule}".format(
                     schedule=sanitize_id(schedule),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1349,7 +1342,6 @@ class SubscriptionScheduleService(StripeService):
                 "/v1/subscription_schedules/{schedule}".format(
                     schedule=sanitize_id(schedule),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1372,7 +1364,6 @@ class SubscriptionScheduleService(StripeService):
                 "/v1/subscription_schedules/{schedule}/cancel".format(
                     schedule=sanitize_id(schedule),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1395,7 +1386,6 @@ class SubscriptionScheduleService(StripeService):
                 "/v1/subscription_schedules/{schedule}/cancel".format(
                     schedule=sanitize_id(schedule),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1418,7 +1408,6 @@ class SubscriptionScheduleService(StripeService):
                 "/v1/subscription_schedules/{schedule}/release".format(
                     schedule=sanitize_id(schedule),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -1441,7 +1430,6 @@ class SubscriptionScheduleService(StripeService):
                 "/v1/subscription_schedules/{schedule}/release".format(
                     schedule=sanitize_id(schedule),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,

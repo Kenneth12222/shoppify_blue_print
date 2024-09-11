@@ -51,6 +51,7 @@ class File(CreateableAPIResource["File"], ListableAPIResource["File"]):
             "customer_signature",
             "dispute_evidence",
             "identity_document",
+            "issuing_regulatory_reporting",
             "pci_document",
             "tax_document_user_upload",
             "terminal_reader_splashscreen",
@@ -62,7 +63,7 @@ class File(CreateableAPIResource["File"], ListableAPIResource["File"]):
     class CreateParamsFileLinkData(TypedDict):
         create: bool
         """
-        Set this to `true` to create a file link for the newly created file. Creating a link is only possible when the file's `purpose` is one of the following: `business_icon`, `business_logo`, `customer_signature`, `dispute_evidence`, `pci_document`, `tax_document_user_upload`, or `terminal_reader_splashscreen`.
+        Set this to `true` to create a file link for the newly created file. Creating a link is only possible when the file's `purpose` is one of the following: `business_icon`, `business_logo`, `customer_signature`, `dispute_evidence`, `issuing_regulatory_reporting`, `pci_document`, `tax_document_user_upload`, or `terminal_reader_splashscreen`.
         """
         expires_at: NotRequired[int]
         """
@@ -102,6 +103,7 @@ class File(CreateableAPIResource["File"], ListableAPIResource["File"]):
                 "finance_report_run",
                 "identity_document",
                 "identity_document_downloadable",
+                "issuing_regulatory_reporting",
                 "pci_document",
                 "selfie",
                 "sigma_scheduled_query",
@@ -176,6 +178,7 @@ class File(CreateableAPIResource["File"], ListableAPIResource["File"]):
         "finance_report_run",
         "identity_document",
         "identity_document_downloadable",
+        "issuing_regulatory_reporting",
         "pci_document",
         "selfie",
         "sigma_scheduled_query",
@@ -209,6 +212,8 @@ class File(CreateableAPIResource["File"], ListableAPIResource["File"]):
 
         All of Stripe's officially supported Client libraries support sending multipart/form-data.
         """
+        params["content_type"] = "multipart/form-data"
+
         return cast(
             "File",
             cls._static_request(
@@ -216,7 +221,6 @@ class File(CreateableAPIResource["File"], ListableAPIResource["File"]):
                 cls.class_url(),
                 params=params,
                 base_address="files",
-                api_mode="V1FILES",
             ),
         )
 
@@ -229,6 +233,8 @@ class File(CreateableAPIResource["File"], ListableAPIResource["File"]):
 
         All of Stripe's officially supported Client libraries support sending multipart/form-data.
         """
+        params["content_type"] = "multipart/form-data"
+
         return cast(
             "File",
             await cls._static_request_async(
@@ -236,7 +242,6 @@ class File(CreateableAPIResource["File"], ListableAPIResource["File"]):
                 cls.class_url(),
                 params=params,
                 base_address="files",
-                api_mode="V1FILES",
             ),
         )
 

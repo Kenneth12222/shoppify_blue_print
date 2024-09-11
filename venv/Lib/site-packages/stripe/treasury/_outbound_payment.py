@@ -28,9 +28,11 @@ class OutboundPayment(
     ListableAPIResource["OutboundPayment"],
 ):
     """
-    Use OutboundPayments to send funds to another party's external bank account or [FinancialAccount](https://stripe.com/docs/api#financial_accounts). To send money to an account belonging to the same user, use an [OutboundTransfer](https://stripe.com/docs/api#outbound_transfers).
+    Use [OutboundPayments](https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-payments) to send funds to another party's external bank account or [FinancialAccount](https://stripe.com/docs/api#financial_accounts). To send money to an account belonging to the same user, use an [OutboundTransfer](https://stripe.com/docs/api#outbound_transfers).
 
     Simulate OutboundPayment state changes with the `/v1/test_helpers/treasury/outbound_payments` endpoints. These methods can only be called on test mode objects.
+
+    Related guide: [Moving money with Treasury using OutboundPayment objects](https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-payments)
     """
 
     OBJECT_NAME: ClassVar[Literal["treasury.outbound_payment"]] = (
@@ -190,7 +192,11 @@ class OutboundPayment(
             """
 
         class UsDomesticWire(StripeObject):
-            imad: str
+            chips: Optional[str]
+            """
+            CHIPS System Sequence Number (SSN) of the OutboundPayment for payments sent over the `us_domestic_wire` network.
+            """
+            imad: Optional[str]
             """
             IMAD of the OutboundPayment for payments sent over the `us_domestic_wire` network.
             """
@@ -525,6 +531,10 @@ class OutboundPayment(
         """
 
     class UpdateParamsTrackingDetailsUsDomesticWire(TypedDict):
+        chips: NotRequired[str]
+        """
+        CHIPS System Sequence Number (SSN) for funds sent over the `us_domestic_wire` network.
+        """
         imad: NotRequired[str]
         """
         IMAD for funds sent over the `us_domestic_wire` network.

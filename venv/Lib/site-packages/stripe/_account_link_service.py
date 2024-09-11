@@ -41,7 +41,7 @@ class AccountLinkService(StripeService):
         """
 
     class CreateParamsCollectionOptions(TypedDict):
-        fields: Literal["currently_due", "eventually_due"]
+        fields: NotRequired[Literal["currently_due", "eventually_due"]]
         """
         Specifies whether the platform collects only currently_due requirements (`currently_due`) or both currently_due and eventually_due requirements (`eventually_due`). If you don't specify `collection_options`, the default value is `currently_due`.
         """
@@ -63,7 +63,6 @@ class AccountLinkService(StripeService):
             self._request(
                 "post",
                 "/v1/account_links",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -83,7 +82,6 @@ class AccountLinkService(StripeService):
             await self._request_async(
                 "post",
                 "/v1/account_links",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,

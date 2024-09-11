@@ -34,11 +34,13 @@ class ChargeService(StripeService):
         """
         statement_descriptor: NotRequired[str]
         """
-        For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value as the complete description of a charge on your customers' statements. Must contain at least one letter, maximum 22 characters.
+        For a non-card charge, text that appears on the customer's statement as the statement descriptor. This value overrides the account's default statement descriptor. For information about requirements, including the 22-character limit, see [the Statement Descriptor docs](https://docs.stripe.com/get-started/account/statement-descriptors).
+
+        For a card charge, this value is ignored unless you don't specify a `statement_descriptor_suffix`, in which case this value is used as the suffix.
         """
         statement_descriptor_suffix: NotRequired[str]
         """
-        Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that's set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
+        Provides information about a card charge. Concatenated to the account's [statement descriptor prefix](https://docs.stripe.com/get-started/account/statement-descriptors#static) to form the complete statement descriptor that appears on the customer's statement. If the account has no prefix value, the suffix is concatenated to the account's statement descriptor.
         """
         transfer_data: NotRequired["ChargeService.CaptureParamsTransferData"]
         """
@@ -112,11 +114,13 @@ class ChargeService(StripeService):
         """
         statement_descriptor: NotRequired[str]
         """
-        For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value as the complete description of a charge on your customers' statements. Must contain at least one letter, maximum 22 characters.
+        For a non-card charge, text that appears on the customer's statement as the statement descriptor. This value overrides the account's default statement descriptor. For information about requirements, including the 22-character limit, see [the Statement Descriptor docs](https://docs.stripe.com/get-started/account/statement-descriptors).
+
+        For a card charge, this value is ignored unless you don't specify a `statement_descriptor_suffix`, in which case this value is used as the suffix.
         """
         statement_descriptor_suffix: NotRequired[str]
         """
-        Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that's set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
+        Provides information about a card charge. Concatenated to the account's [statement descriptor prefix](https://docs.stripe.com/get-started/account/statement-descriptors#static) to form the complete statement descriptor that appears on the customer's statement. If the account has no prefix value, the suffix is concatenated to the account's statement descriptor.
         """
         transfer_data: NotRequired["ChargeService.CreateParamsTransferData"]
         """
@@ -232,7 +236,7 @@ class ChargeService(StripeService):
         """
         transfer_group: NotRequired[str]
         """
-        Only return charges for this transfer group.
+        Only return charges for this transfer group, limited to 100.
         """
 
     class ListParamsCreated(TypedDict):
@@ -378,7 +382,6 @@ class ChargeService(StripeService):
             self._request(
                 "get",
                 "/v1/charges",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -398,7 +401,6 @@ class ChargeService(StripeService):
             await self._request_async(
                 "get",
                 "/v1/charges",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -420,7 +422,6 @@ class ChargeService(StripeService):
             self._request(
                 "post",
                 "/v1/charges",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -442,7 +443,6 @@ class ChargeService(StripeService):
             await self._request_async(
                 "post",
                 "/v1/charges",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -463,7 +463,6 @@ class ChargeService(StripeService):
             self._request(
                 "get",
                 "/v1/charges/{charge}".format(charge=sanitize_id(charge)),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -484,7 +483,6 @@ class ChargeService(StripeService):
             await self._request_async(
                 "get",
                 "/v1/charges/{charge}".format(charge=sanitize_id(charge)),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -505,7 +503,6 @@ class ChargeService(StripeService):
             self._request(
                 "post",
                 "/v1/charges/{charge}".format(charge=sanitize_id(charge)),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -526,7 +523,6 @@ class ChargeService(StripeService):
             await self._request_async(
                 "post",
                 "/v1/charges/{charge}".format(charge=sanitize_id(charge)),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -549,7 +545,6 @@ class ChargeService(StripeService):
             self._request(
                 "get",
                 "/v1/charges/search",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -572,7 +567,6 @@ class ChargeService(StripeService):
             await self._request_async(
                 "get",
                 "/v1/charges/search",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -599,7 +593,6 @@ class ChargeService(StripeService):
                 "/v1/charges/{charge}/capture".format(
                     charge=sanitize_id(charge),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -626,7 +619,6 @@ class ChargeService(StripeService):
                 "/v1/charges/{charge}/capture".format(
                     charge=sanitize_id(charge),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,

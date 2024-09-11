@@ -31,6 +31,7 @@ class FileService(StripeService):
             "customer_signature",
             "dispute_evidence",
             "identity_document",
+            "issuing_regulatory_reporting",
             "pci_document",
             "tax_document_user_upload",
             "terminal_reader_splashscreen",
@@ -42,7 +43,7 @@ class FileService(StripeService):
     class CreateParamsFileLinkData(TypedDict):
         create: bool
         """
-        Set this to `true` to create a file link for the newly created file. Creating a link is only possible when the file's `purpose` is one of the following: `business_icon`, `business_logo`, `customer_signature`, `dispute_evidence`, `pci_document`, `tax_document_user_upload`, or `terminal_reader_splashscreen`.
+        Set this to `true` to create a file link for the newly created file. Creating a link is only possible when the file's `purpose` is one of the following: `business_icon`, `business_logo`, `customer_signature`, `dispute_evidence`, `issuing_regulatory_reporting`, `pci_document`, `tax_document_user_upload`, or `terminal_reader_splashscreen`.
         """
         expires_at: NotRequired[int]
         """
@@ -82,6 +83,7 @@ class FileService(StripeService):
                 "finance_report_run",
                 "identity_document",
                 "identity_document_downloadable",
+                "issuing_regulatory_reporting",
                 "pci_document",
                 "selfie",
                 "sigma_scheduled_query",
@@ -134,7 +136,6 @@ class FileService(StripeService):
             self._request(
                 "get",
                 "/v1/files",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -154,7 +155,6 @@ class FileService(StripeService):
             await self._request_async(
                 "get",
                 "/v1/files",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -169,12 +169,12 @@ class FileService(StripeService):
 
         All of Stripe's officially supported Client libraries support sending multipart/form-data.
         """
+        options["content_type"] = "multipart/form-data"
         return cast(
             File,
             self._request(
                 "post",
                 "/v1/files",
-                api_mode="V1FILES",
                 base_address="files",
                 params=params,
                 options=options,
@@ -189,12 +189,12 @@ class FileService(StripeService):
 
         All of Stripe's officially supported Client libraries support sending multipart/form-data.
         """
+        options["content_type"] = "multipart/form-data"
         return cast(
             File,
             await self._request_async(
                 "post",
                 "/v1/files",
-                api_mode="V1FILES",
                 base_address="files",
                 params=params,
                 options=options,
@@ -215,7 +215,6 @@ class FileService(StripeService):
             self._request(
                 "get",
                 "/v1/files/{file}".format(file=sanitize_id(file)),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -236,7 +235,6 @@ class FileService(StripeService):
             await self._request_async(
                 "get",
                 "/v1/files/{file}".format(file=sanitize_id(file)),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,

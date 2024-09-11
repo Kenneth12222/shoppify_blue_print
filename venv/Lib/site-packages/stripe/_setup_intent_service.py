@@ -760,6 +760,12 @@ class SetupIntentService(StripeService):
         """
         If this is a `amazon_pay` SetupIntent, this sub-hash contains details about the AmazonPay payment method options.
         """
+        bacs_debit: NotRequired[
+            "SetupIntentService.ConfirmParamsPaymentMethodOptionsBacsDebit"
+        ]
+        """
+        If this is a `bacs_debit` SetupIntent, this sub-hash contains details about the Bacs Debit payment method options.
+        """
         card: NotRequired[
             "SetupIntentService.ConfirmParamsPaymentMethodOptionsCard"
         ]
@@ -844,6 +850,17 @@ class SetupIntentService(StripeService):
     class ConfirmParamsPaymentMethodOptionsAmazonPay(TypedDict):
         pass
 
+    class ConfirmParamsPaymentMethodOptionsBacsDebit(TypedDict):
+        mandate_options: NotRequired[
+            "SetupIntentService.ConfirmParamsPaymentMethodOptionsBacsDebitMandateOptions"
+        ]
+        """
+        Additional fields for Mandate creation
+        """
+
+    class ConfirmParamsPaymentMethodOptionsBacsDebitMandateOptions(TypedDict):
+        pass
+
     class ConfirmParamsPaymentMethodOptionsCard(TypedDict):
         mandate_options: NotRequired[
             "SetupIntentService.ConfirmParamsPaymentMethodOptionsCardMandateOptions"
@@ -864,6 +881,7 @@ class SetupIntentService(StripeService):
                 "diners",
                 "discover",
                 "eftpos_au",
+                "girocard",
                 "interac",
                 "jcb",
                 "mastercard",
@@ -1910,6 +1928,12 @@ class SetupIntentService(StripeService):
         """
         If this is a `amazon_pay` SetupIntent, this sub-hash contains details about the AmazonPay payment method options.
         """
+        bacs_debit: NotRequired[
+            "SetupIntentService.CreateParamsPaymentMethodOptionsBacsDebit"
+        ]
+        """
+        If this is a `bacs_debit` SetupIntent, this sub-hash contains details about the Bacs Debit payment method options.
+        """
         card: NotRequired[
             "SetupIntentService.CreateParamsPaymentMethodOptionsCard"
         ]
@@ -1994,6 +2018,17 @@ class SetupIntentService(StripeService):
     class CreateParamsPaymentMethodOptionsAmazonPay(TypedDict):
         pass
 
+    class CreateParamsPaymentMethodOptionsBacsDebit(TypedDict):
+        mandate_options: NotRequired[
+            "SetupIntentService.CreateParamsPaymentMethodOptionsBacsDebitMandateOptions"
+        ]
+        """
+        Additional fields for Mandate creation
+        """
+
+    class CreateParamsPaymentMethodOptionsBacsDebitMandateOptions(TypedDict):
+        pass
+
     class CreateParamsPaymentMethodOptionsCard(TypedDict):
         mandate_options: NotRequired[
             "SetupIntentService.CreateParamsPaymentMethodOptionsCardMandateOptions"
@@ -2014,6 +2049,7 @@ class SetupIntentService(StripeService):
                 "diners",
                 "discover",
                 "eftpos_au",
+                "girocard",
                 "interac",
                 "jcb",
                 "mastercard",
@@ -2370,7 +2406,7 @@ class SetupIntentService(StripeService):
         """
         payment_method: NotRequired[str]
         """
-        ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this SetupIntent.
+        ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this SetupIntent. To unset this field to null, pass in an empty string.
         """
         payment_method_configuration: NotRequired[str]
         """
@@ -3037,6 +3073,12 @@ class SetupIntentService(StripeService):
         """
         If this is a `amazon_pay` SetupIntent, this sub-hash contains details about the AmazonPay payment method options.
         """
+        bacs_debit: NotRequired[
+            "SetupIntentService.UpdateParamsPaymentMethodOptionsBacsDebit"
+        ]
+        """
+        If this is a `bacs_debit` SetupIntent, this sub-hash contains details about the Bacs Debit payment method options.
+        """
         card: NotRequired[
             "SetupIntentService.UpdateParamsPaymentMethodOptionsCard"
         ]
@@ -3121,6 +3163,17 @@ class SetupIntentService(StripeService):
     class UpdateParamsPaymentMethodOptionsAmazonPay(TypedDict):
         pass
 
+    class UpdateParamsPaymentMethodOptionsBacsDebit(TypedDict):
+        mandate_options: NotRequired[
+            "SetupIntentService.UpdateParamsPaymentMethodOptionsBacsDebitMandateOptions"
+        ]
+        """
+        Additional fields for Mandate creation
+        """
+
+    class UpdateParamsPaymentMethodOptionsBacsDebitMandateOptions(TypedDict):
+        pass
+
     class UpdateParamsPaymentMethodOptionsCard(TypedDict):
         mandate_options: NotRequired[
             "SetupIntentService.UpdateParamsPaymentMethodOptionsCardMandateOptions"
@@ -3141,6 +3194,7 @@ class SetupIntentService(StripeService):
                 "diners",
                 "discover",
                 "eftpos_au",
+                "girocard",
                 "interac",
                 "jcb",
                 "mastercard",
@@ -3417,7 +3471,6 @@ class SetupIntentService(StripeService):
             self._request(
                 "get",
                 "/v1/setup_intents",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -3437,7 +3490,6 @@ class SetupIntentService(StripeService):
             await self._request_async(
                 "get",
                 "/v1/setup_intents",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -3460,7 +3512,6 @@ class SetupIntentService(StripeService):
             self._request(
                 "post",
                 "/v1/setup_intents",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -3483,7 +3534,6 @@ class SetupIntentService(StripeService):
             await self._request_async(
                 "post",
                 "/v1/setup_intents",
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -3510,7 +3560,6 @@ class SetupIntentService(StripeService):
                 "/v1/setup_intents/{intent}".format(
                     intent=sanitize_id(intent)
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -3537,7 +3586,6 @@ class SetupIntentService(StripeService):
                 "/v1/setup_intents/{intent}".format(
                     intent=sanitize_id(intent)
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -3560,7 +3608,6 @@ class SetupIntentService(StripeService):
                 "/v1/setup_intents/{intent}".format(
                     intent=sanitize_id(intent)
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -3583,7 +3630,6 @@ class SetupIntentService(StripeService):
                 "/v1/setup_intents/{intent}".format(
                     intent=sanitize_id(intent)
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -3608,7 +3654,6 @@ class SetupIntentService(StripeService):
                 "/v1/setup_intents/{intent}/cancel".format(
                     intent=sanitize_id(intent),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -3633,7 +3678,6 @@ class SetupIntentService(StripeService):
                 "/v1/setup_intents/{intent}/cancel".format(
                     intent=sanitize_id(intent),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -3669,7 +3713,6 @@ class SetupIntentService(StripeService):
                 "/v1/setup_intents/{intent}/confirm".format(
                     intent=sanitize_id(intent),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -3705,7 +3748,6 @@ class SetupIntentService(StripeService):
                 "/v1/setup_intents/{intent}/confirm".format(
                     intent=sanitize_id(intent),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -3728,7 +3770,6 @@ class SetupIntentService(StripeService):
                 "/v1/setup_intents/{intent}/verify_microdeposits".format(
                     intent=sanitize_id(intent),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
@@ -3751,7 +3792,6 @@ class SetupIntentService(StripeService):
                 "/v1/setup_intents/{intent}/verify_microdeposits".format(
                     intent=sanitize_id(intent),
                 ),
-                api_mode="V1",
                 base_address="api",
                 params=params,
                 options=options,
