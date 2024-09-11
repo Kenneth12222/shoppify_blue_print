@@ -1,9 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %}Success{% endblock %}
+{% block title %}Payment Successful{% endblock %}
 
 {% block content %}
-<h2>Payment Successful</h2>
-<p>Thank you for your purchase!</p>
-<a href="{{ url_for('index') }}" class="btn btn-primary">Continue Shopping</a>
+<div class="flex flex-col items-center justify-center h-screen text-center">
+    <!-- Success Icon and Heading -->
+    <div class="mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-500 mb-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-6.707l4.293-4.293a1 1 0 111.414 1.414l-5 5a1 1 0 01-1.414 0l-2.5-2.5a1 1 0 111.414-1.414L9 11.293z" clip-rule="evenodd" />
+        </svg>
+        <h2 class="text-3xl font-bold text-gray-800">Payment Successful</h2>
+    </div>
+
+    <!-- Message -->
+    <p class="text-lg text-gray-600 mb-8">Thank you for your purchase! Your order has been confirmed.</p>
+
+    <!-- Continue Shopping Button -->
+    <a href="{{ url_for('index') }}" class="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition duration-300">Continue Shopping</a>
+</div>
 {% endblock %}

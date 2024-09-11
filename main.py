@@ -289,3 +289,4 @@ app.add_url_rule('/logout', view_func=LogoutView.as_view('logout'))
 # Run the Flask app
 if __name__ == '__main__':
     app.run(debug=True)
+
