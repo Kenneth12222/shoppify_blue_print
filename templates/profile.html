@@ -1,9 +1,24 @@
 {% extends 'base.html' %}
+
 {% block title %}Profile{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2>Welcome, {{ current_user.username }}</h2>
-    <p>This is your profile page.</p>
+<div class="flex flex-col items-center justify-center h-screen text-center">
+    <!-- Profile Icon and Welcome Message -->
+    <div class="mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-800 mb-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3-10a3 3 0 11-6 0 3 3 0 016 0zM7 12a5 5 0 106 0H7z" clip-rule="evenodd" />
+        </svg>
+        <h2 class="text-3xl font-bold text-gray-800">Welcome, {{ current_user.username }}</h2>
+    </div>
+
+    <!-- Profile Information -->
+    <p class="text-lg text-gray-600 mb-8">This is your profile page. You can view and manage your account details here.</p>
+
+    <!-- Edit Profile and Settings Button -->
+    <div class="space-x-4">
+        <a href="" class="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition duration-300">Edit Profile</a>
+        <a href="" class="bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-700 transition duration-300">Settings</a>
+    </div>
 </div>
 {% endblock %}
