@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuIcon = document.querySelector("#fas-bars");
     const closeIcon = document.querySelector('#closeIcon');
     const navMenu = document.querySelector('nav ul');
-    const overlay = document.querySelector('.overlay');
 
     menuIcon.addEventListener('click', () => {
         openMenu();
@@ -12,42 +11,20 @@ document.addEventListener('DOMContentLoaded', () => {
         closeMenu();
     });
 
-    overlay.addEventListener('click', () => {
-        closeMenu();
-    });
-
+    // Function to open the menu
     function openMenu() {
-        navMenu.style.right = '0';
-        overlay.style.display = 'block';
+        navMenu.style.right = '0'; // Open the menu
     }
 
+    // Function to close the menu
     function closeMenu() {
-        navMenu.style.right = '-300px';
-        overlay.style.display = 'none';
+        navMenu.style.right = '-300px'; // Close the menu
     }
 
-    // Toggle menu functionality
-    function toggleMenu() {
-        if (navMenu.style.right === '-300px') {
-            openMenu();
-        } else {
-            closeMenu();
-        }
-    }
-
-    menuIcon.addEventListener('click', () => {
-        toggleMenu();
-    });
-
-    closeIcon.addEventListener('click', () => {
-        toggleMenu();
-    });
-
-    // Keyboard accessibility
+    // Close the menu on pressing the Escape key for accessibility
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
             closeMenu();
         }
     });
-})
-
+});

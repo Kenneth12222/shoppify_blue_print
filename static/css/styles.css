@@ -102,18 +102,16 @@
 }
 
 @media only screen and (max-width: 768px) {
-
     nav ul {
-        background: #030712 ;
-        /* backdrop-filter: blur(30px); */
+        background: #030712;
         position: fixed;
         top: 0;
         height: 100%;
-        right: -300px;
+        right: -300px; /* Initially off-screen */
         width: 200px;
         padding-top: 50px;
         z-index: 2;
-        transition: .3s ease-in-out;
+        transition: 0.3s ease-in-out; /* Smooth transition */
     }
 
     nav ul li {
@@ -121,13 +119,10 @@
         color: #fff;
         margin: 25px;
     }
-    
 
     #fas-bars, #closeIcon {
         display: block;
-        /* position: absolute; */
-        top: 25px;
-        right: 25px;
+        font-size: 30px;
         cursor: pointer;
     }
 
@@ -137,12 +132,8 @@
         color: #fff;
         top: 2px;
     }
+}
 
-    .btn {
-        left: 100px;
-        position: absolute;
-    }
-} 
 
 
 /* navbar ends */
@@ -341,61 +332,6 @@
 
 /* product end */
 
-/* policy */
-.feature-section {
-    display: flex;
-    flex-direction: column; /* Stack items vertically on smaller screens */
-    align-items: center; /* Center items horizontally */
-    justify-content: center;
-    gap: 2rem; /* Space between items */
-    text-align: center;
-    padding: 5rem 0; /* Equivalent to py-20 */
-    font-size: 0.75rem; /* Equivalent to text-xs */
-    color: #4A5568; /* Equivalent to text-gray-700 */
-}
-
-.feature-section div {
-    max-width: 300px; /* Restrict max width of each item */
-}
-
-.feature-section i {
-    font-size: 3rem; /* Equivalent to w-12 */
-    margin-bottom: 1.25rem; /* Equivalent to mb-5 */
-    color: #4A5568; /* Color of the icons */
-}
-
-.feature-section p {
-    margin: 0;
-}
-
-.feature-section .title {
-    font-weight: 600; /* Equivalent to font-semibold */
-    color: #2D3748; /* Equivalent to text-gray-800 */
-}
-
-.feature-section .description {
-    color: #808284; /* Equivalent to text-gray-400 */
-}
-
-@media (min-width: 640px) {
-    .feature-section {
-        flex-direction: row; /* Align items in a row on small screens and up */
-        justify-content: space-around; /* Space items evenly */
-        gap: 0.5rem; /* Adjust gap for small screens */
-    }
-
-    .feature-section {
-        font-size: 0.875rem; /* Equivalent to text-sm */
-    }
-}
-
-@media (min-width: 768px) {
-    .feature-section {
-        font-size: 1rem; /* Equivalent to text-base */
-    }
-}
-
-/*  */
 
 /* shopping-banner */
 #shopping-banner{
@@ -453,7 +389,77 @@
     object-fit: contain;
     object-position: center;
 }
+
+@media (max-width: 780px) {
+    .shopping-banner-container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .shopping-banner-img img {
+        width: 100%;
+    }
+}
 /* end shopping banner */
+
+
+/* policy */
+.feature-section {
+    display: flex;
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    align-items: center; /* Center items horizontally */
+    justify-content: center;
+    gap: 2rem; /* Space between items */
+    text-align: center;
+    padding: 5rem 0; /* Equivalent to py-20 */
+    font-size: 0.75rem; /* Equivalent to text-xs */
+    color: #4A5568; /* Equivalent to text-gray-700 */
+}
+
+.feature-section div {
+    max-width: 300px; /* Restrict max width of each item */
+}
+
+.feature-section i {
+    font-size: 3rem; /* Equivalent to w-12 */
+    margin-bottom: 1.25rem; /* Equivalent to mb-5 */
+    color: #4A5568; /* Color of the icons */
+}
+
+.feature-section p {
+    margin: 0;
+}
+
+.feature-section .title {
+    font-weight: 600;
+    color: #2D3748; 
+}
+
+.feature-section .description {
+    color: #808284; /* Equivalent to text-gray-400 */
+}
+
+@media (min-width: 640px) {
+    .feature-section {
+        flex-direction: row; /* Align items in a row on small screens and up */
+        justify-content: space-around; /* Space items evenly */
+        gap: 0.5rem; /* Adjust gap for small screens */
+    }
+
+    .feature-section {
+        font-size: 0.875rem; /* Equivalent to text-sm */
+    }
+}
+
+@media (min-width: 768px) {
+    .feature-section {
+        font-size: 1rem; /* Equivalent to text-base */
+    }
+}
+
+/*  */
+
 /* end policy */
 
 /* subscribe */
@@ -504,6 +510,18 @@
 @media (min-width: 640px) {
     .subscription-section form {
         width: 50%;
+    }
+}
+
+@media (max-width: 640px) {
+    .subscription-section form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .subscription-section form input {
+        width: 100%;
     }
 }
 /* end subcribe */
